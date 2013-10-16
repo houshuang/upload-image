@@ -1,6 +1,6 @@
 # encoding: utf-8
-
-require './pashua'
+$:.push(File.dirname($0))
+require 'pashua'
 include Pashua
 
 
@@ -119,7 +119,11 @@ cancel.label = Cancel
 cancel.tooltip = Closes this window without taking action"
 
 pash = pashua_run config
-exit if pash['cancel'] == 1
+if pash['cancel'] == 1
+  pbcopy("")
+  exit
+end
+  
 
 newfname = pash['fname'].strip + ".png"
 fail "You didn't supply a filename" unless newfname.size > 0
